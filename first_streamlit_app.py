@@ -14,4 +14,4 @@ fruit_list = pd.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/
 fruit_list = fruit_list.set_index('Fruit')
 fruits_selected = streamlit.multiselect("Choose the fruits you would like in your smoothie: ", list(fruit_list.index), ['Apple', 'Banana', 'Grapes'])
 fruits_to_show = fruit_list.loc[fruits_selected]
-pd.dataframe(fruits_to_show)
+pd.DataFrame(fruits_to_show)
