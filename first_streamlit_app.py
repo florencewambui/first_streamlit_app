@@ -18,5 +18,10 @@ fruits_to_show = fruit_list.loc[fruits_selected]
 pd.DataFrame(fruits_to_show)
 
 streamlit.header('Fruit advice')
-fruitvice_response = requests.get('https://fruityvice.com/api/fruit/banana')
-streamline.text(fruitvice_response.json())
+#user selects fruit to get advice on
+fruit_choice = streamlit.text_input('What fruit would you like to learn more about?')
+
+#fetch data from fruitvice api
+fruitvice_response = requests.get('https://fruityvice.com/api/fruit/' + fruit_choice)
+fruit_info = pd.json_normalize(fruitvice_response.json())
+pd.DataFrame(fruit_info)
