@@ -24,4 +24,5 @@ fruit_choice = streamlit.text_input('What fruit would you like to learn more abo
 #fetch data from fruitvice api
 fruitvice_response = requests.get('https://fruityvice.com/api/fruit/' + fruit_choice)
 fruit_info = pd.json_normalize(fruitvice_response.json())
+streamlit.text('Below is some helpful information about '+ fruit_choice)
 streamlit.dataframe(fruit_info)
