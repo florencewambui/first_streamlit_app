@@ -1,5 +1,6 @@
 import streamlit
 import pandas as pd
+import requests
 
 streamlit.title('Snowflake Learning Diner')
 
@@ -15,3 +16,7 @@ fruit_list = fruit_list.set_index('Fruit')
 fruits_selected = streamlit.multiselect("Choose the fruits you would like in your smoothie: ", list(fruit_list.index), ['Apple', 'Banana', 'Grapes'])
 fruits_to_show = fruit_list.loc[fruits_selected]
 pd.DataFrame(fruits_to_show)
+
+streamlit.header('Fruit advice')
+fruitvice_response = requests.get('https://fruityvice.com/api/fruit/banana')
+streamline.text(fruitvice_response.json())
