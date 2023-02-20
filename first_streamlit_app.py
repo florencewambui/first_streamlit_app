@@ -19,4 +19,4 @@ pd.DataFrame(fruits_to_show)
 
 streamlit.header('Fruit advice')
 fruitvice_response = requests.get('https://fruityvice.com/api/fruit/banana')
-streamline.text(fruitvice_response.json)
+streamline.text(fruitvice_response.json())
