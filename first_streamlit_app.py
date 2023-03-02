@@ -37,7 +37,8 @@ try:
     streamlit.dataframe(fruit_info_fetched)
 except URLError as e:
   streamlit.error()
-    
+
+  
 
 
 def fetch_fruit_choice():
@@ -45,6 +46,10 @@ def fetch_fruit_choice():
     my_cur.execute("select * from fruit_load_list")
     my_data_rows = my_cur.fetchall()
     return my_data_rows
+  
+def insert_row_to_fruit_load(fruit_to_load):
+    my_cur.execute('insert into fruit_load_list values(fruit_to_load))
+    return 'Thank you for adding ' + fruit_to_load
 
 if streamlit.button('Fetch fruits list'):
   my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
@@ -52,7 +57,13 @@ if streamlit.button('Fetch fruits list'):
   fetched_fruits = fetch_fruit_choice()
   streamlit.dataframe(fetched_fruits)
 
-
 fruit_choice_load = streamlit.text_input('What fruit would you like to load?')
-streamlit.text('Thank you for adding ' + fruit_choice_load)
+                   
+if streamlit.button('Add to fruits list'):
+   my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+   my_cur = my_cnx.cursor()
+   insert_row_to_fruit_load(fruit_choice_load)
+
+
+
 
