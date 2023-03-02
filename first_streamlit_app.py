@@ -21,8 +21,6 @@ streamlit.dataframe(fruits_to_show)
 
 streamlit.header('Fruit advice')
 #user selects fruit to get advice on
-fruit_choice = streamlit.text_input('What fruit would you like to learn more about?')
-
 #fetch data from fruitvice api
 def get_fruitvice_data(fruit_choice):
   fruitvice_response = requests.get('https://fruityvice.com/api/fruit/' + fruit_choice)
