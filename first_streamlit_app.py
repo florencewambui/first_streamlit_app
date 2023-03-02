@@ -2,6 +2,7 @@ import streamlit
 import pandas as pd
 import requests
 import snowflake.connector
+from urllib.error import URLError
 
 streamlit.title('Snowflake Learning Diner')
 
@@ -23,8 +24,20 @@ streamlit.header('Fruit advice')
 fruit_choice = streamlit.text_input('What fruit would you like to learn more about?')
 
 #fetch data from fruitvice api
-fruitvice_response = requests.get('https://fruityvice.com/api/fruit/' + fruit_choice)
-fruit_info = pd.json_normalize(fruitvice_response.json())
+def get_fruitvice_data(fruit_choice):
+  fruitvice_response = requests.get('https://fruityvice.com/api/fruit/' + fruit_choice)
+  fruit_info = pd.json_normalize(fruitvice_response.json())
+  return fruit_info
+
+try:
+  fruit_choice = streamlit.text_input('What fruit would you like to learn more about?')
+  if not fruit_choice:
+    return streamlit.error('Please input a fruit name in the text box above.')
+  else:
+    fruit_info_fetched = get_fruivice_data(fruit_choice)
+except:
+    
+
 streamlit.text('Below is some helpful information about '+ fruit_choice)
 streamlit.dataframe(fruit_info)
 
@@ -36,5 +49,5 @@ streamlit.header("Here is the list of fruits:")
 streamlit.dataframe(my_data_row)
 
 fruit_choice_load = streamlit.text_input('What fruit would you like to load?')
-streamlit.text('Thank you for adding' + fruit_choice_load)
+streamlit.text('Thank you for adding ' + fruit_choice_load)
 
