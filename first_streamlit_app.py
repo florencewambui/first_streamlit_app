@@ -32,7 +32,7 @@ def get_fruitvice_data(fruit_choice):
 try:
   fruit_choice = streamlit.text_input('What fruit would you like to learn more about?')
   if not fruit_choice:
-    return streamlit.error('Please input a fruit name in the text box above.')
+    streamlit.error('Please input a fruit name in the text box above.')
   else:
     fruit_info_fetched = get_fruivice_data(fruit_choice)
 except URLError as e:
