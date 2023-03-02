@@ -41,16 +41,6 @@ except URLError as e:
   
 
 
-def fetch_fruit_choice():
-  with my_cnx.cursor() as my_cur:
-    my_cur.execute("select * from fruit_load_list")
-    my_data_rows = my_cur.fetchall()
-    return my_data_rows
-  
-def insert_row_to_fruit_load(fruit_to_load):
-    my_cur.execute('insert into fruit_load_list values(fruit_to_load)')
-    return 'Thank you for adding ' + fruit_to_load
-
 if streamlit.button('Fetch fruits list'):
   my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
   
@@ -59,10 +49,31 @@ if streamlit.button('Fetch fruits list'):
 
 fruit_choice_load = streamlit.text_input('What fruit would you like to load?')
                    
+
+
+def fetch_fruit_choice():
+  with my_cnx.cursor() as my_cur:
+    my_cur.execute("select * from fruit_load_list")
+    my_data_rows = my_cur.fetchall()
+    return my_data_rows
+  
+#def insert_row_to_fruit_load(fruit_to_load):
+    
+ #   my_cur.execute('insert into fruit_load_list values()')
+  #  return 'Thank you for adding ' + fruit_to_load
+   
+
 if streamlit.button('Add to fruits list'):
-   my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+   my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])  
    my_cur = my_cnx.cursor()
-   insert_row_to_fruit_load(fruit_choice_load)
+   #set fruit_choice_load = fruit_choice_load 
+   my_cur.execute("insert into fruit_load_list values('jackfruit')")
+   my_cur.execute("insert into fruit_load_list values('papaya')")
+   my_cur.execute("insert into fruit_load_list values('guava')")
+   my_cur.execute("insert into fruit_load_list values('kiwi')")
+  
+  
+  
 
 
 
