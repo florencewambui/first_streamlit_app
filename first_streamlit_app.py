@@ -46,6 +46,7 @@ if streamlit.button('Fetch fruits list'):
   
   fetched_fruits = fetch_fruit_choice()
   streamlit.dataframe(fetched_fruits)
+  my_cnx.close()
 
 fruit_choice_load = streamlit.text_input('What fruit would you like to load?')
                    
@@ -71,6 +72,7 @@ if streamlit.button('Add to fruits list'):
    my_cur.execute("insert into fruit_load_list values('papaya')")
    my_cur.execute("insert into fruit_load_list values('guava')")
    my_cur.execute("insert into fruit_load_list values('kiwi')")
+   my_cnx.close()
   
   
   
