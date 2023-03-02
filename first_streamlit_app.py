@@ -48,7 +48,7 @@ def fetch_fruit_choice():
     return my_data_rows
   
 def insert_row_to_fruit_load(fruit_to_load):
-    my_cur.execute('insert into fruit_load_list values(fruit_to_load))
+    my_cur.execute('insert into fruit_load_list values(fruit_to_load)')
     return 'Thank you for adding ' + fruit_to_load
 
 if streamlit.button('Fetch fruits list'):
